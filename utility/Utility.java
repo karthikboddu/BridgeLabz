@@ -46,4 +46,34 @@ public class Utility {
 			}
 		}
 		
+		public static void checkAnagram(String s1,String s2) {
+			boolean flag =false;
+			char s1Arr[] = s1.toCharArray();
+			char s2Arr[] = s2.toCharArray();
+			
+			for(int i=0;i<s1Arr.length;i++) {
+				for(int j=i+1;j<s2Arr.length;j++) {
+					if(s1Arr[i]==s2Arr[j]) {
+					flag = true;
+					}
+				}
+			}
+			
+			if(flag==true) {
+				System.out.println("Anagram");
+			}else {
+				System.out.println("Not a anagram");
+			}
+		}
+		
+		public static void BinarySearch(int[] a,int n,int k) {
+			int beg =0;
+			int last = a.length-1;
+			int mid = (beg+last)/2;
+			
+			if(k==mid) {
+				
+			}
+		}
+		
 }
