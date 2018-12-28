@@ -11,7 +11,7 @@ public class primeFactorization {
 		checkPrime(no);
 	}
 	public static void checkPrime(int no) {
-		System.out.println("prime factors are");
+		System.out.println("prime factors are");	
 		for(int num =2;num<=no;num++) {
 			boolean isPrime =true;
 			for(int i=2;i<=num/2;i++) {

@@ -23,7 +23,7 @@ public class Anagram {
 //		}
 
 //		String s2 = s1.toString();
-//		System.out.println(s2);
+//		System.out.println(s2);	
 		System.out.println("Enter First String");
 		String s1 =Utility.getString();
 		System.out.println("Enter second String");

@@ -18,7 +18,7 @@ public class CouponNumber {
 			 System.out.println("generated coupon" +couponNo);
 			 totalRandom++;
 			 
-			 if(!coupons.contains(couponNo)) {
+			 if(!coupons.contains(couponNo)) {	
 				 coupons.add(couponNo);
 			 }else
 				 i--;
