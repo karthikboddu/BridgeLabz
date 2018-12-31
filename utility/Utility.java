@@ -1,7 +1,17 @@
 package com.bridgelabz.utility;
 
+import java.util.List;
+import java.util.Map;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
+
+import javax.swing.text.AbstractDocument.BranchElement;
 
 
 public class Utility {
@@ -93,7 +103,7 @@ public class Utility {
 	            } else {
 	                start = mid + 1;
 	            }
-	            mid = (start+end)/2;
+	            
 	        }
 	       if(start>end) {
 	    	   System.out.println("not present");
@@ -209,6 +219,237 @@ public class Utility {
 				System.out.println(s1[k]);
 			}
 		}
+		
+		public static List<Integer> getPrimeNoUpto(int range) {
+			int counter=0;
+			int prime=2;
+			List<Integer> aList = new ArrayList<Integer>();
+			while(prime<range) {
+				boolean isPrime = true;
+				for(int j=2;j<=prime/2;j++)
+				if(prime%j==0) {
+					isPrime = false;
+					break;
+				}
+				if(isPrime) {
+					aList.add(prime);
+					counter++;
+				}
+				prime++;
+			}
+			return aList;
+		}
+		
+		public static void printArray(int arrays[]) {
+			for(int i=0;i<arrays.length;i++) {
+				System.out.println(arrays[i]);
+			}
+		}
+		
+		public static boolean getPalindromeList(String s1,String s2) {
+
+			if(s1.length()==s2.length()) {
+				for(int i=0;i<s1.length();i++) {
+					if(s1.charAt(i)!=s2.charAt(s2.length()-i-1)) 
+						return false;
+				}
+					return true;
+				
+			}else {
+				return false;
+			}
+				
+		}
+		
+		public static Map<String,String> isPalindrome(List<Integer> lists) {
+			Map<String,String> palindromeList= new LinkedHashMap<>();
+			Integer listToArray[] = lists.toArray(new Integer[lists.size()]);
+			
+			for(int i=0;i<listToArray.length;i++) {
+				for(int j=i+1;j<listToArray.length;j++) {
+					if(getPalindromeList(listToArray[i]+"",listToArray[j]+"")) {
+						palindromeList.put(listToArray[i]+"",listToArray[j]+"");
+					}
+				}
+			}
+			return palindromeList;
+		}
+		
+		public static Map<String,String> getPrimeAnagramList(List<Integer> ls) {
+			Map<String, String> anagram = new LinkedHashMap<String,String>();
+			Integer listToArray[] = ls.toArray(new Integer[ls.size()]);
+			
+			for(int i=0;i<listToArray.length;i++) {
+				for(int j=i+1;j<listToArray.length;j++) {
+					if(isPrimeAnagram(listToArray[i]+"",listToArray[j]+"")) {
+						anagram.put(listToArray[i]+"", listToArray[j]+"");
+						}
+				}
+			}
+			return anagram;
+		}
+		
+		public static boolean isPrimeAnagram(String s1,String s2) {
+			String s1Arr[] = s1.split(" ");
+			String s2Arr[] = s2.split(" ");
+			String temp1s1="";
+			String temp1s2="";
+			for(String str1:s1Arr) {
+				temp1s1+=str1;
+			}
+			for(String str2:s2Arr) {
+				temp1s2+=str2;
+			}
+			
+			if(temp1s1.length() == temp1s2.length()) {
+				char s1Char[] = temp1s1.toCharArray();
+				char s2Char[] = temp1s2.toCharArray();
+				
+				Arrays.sort(s1Char);
+				Arrays.sort(s2Char);
+				
+				String newss1 = new String(s1Char);
+				String newss2 = new String(s2Char);
+				
+				return newss1.equals(newss2);
+				
+			}else {
+				return false;
+			}
+		}
+		
+		public static String[] readStringFile(String path,String divide) {
+			List<String> wordList = new ArrayList<String>();
+			String line;
+			String list[];
+			try {
+				InputStream iS = new FileInputStream(path); //reads in byte
+				InputStreamReader iSR = new InputStreamReader(iS);//byte stream to character stream
+				BufferedReader bs = new BufferedReader(iSR);//reads character stream
+				while((line=bs.readLine())!=null) {
+					String words[] = line.split(divide);
+					for(String wordStr :words) {
+					wordList.add(wordStr);
+					}
+				}
+				bs.close();
+				
+				
+		
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			list = wordList.toArray(new String[wordList.size()]);
+			return list;
+		}
+		
+		public static int binarySearchFile(String[] str,String key) {
+				return search(str, 0, str.length-1, key);
+		}		
+		public static int search(String str[],int start,int end,String key) {
+			if((start-end) == 0) {
+				if(str[start].compareTo(key)==0) {
+					return start;
+				}
+				return -1;
+			}else {
+				int mid = (start+end)/2;
+				if(str[mid].compareTo(key)==0) {
+					return mid;
+				}else {
+					if(key.compareTo(str[mid])>0) {
+						return search(str, mid+1, end, key);
+					}else {
+						return search(str, start, mid, key);
+					}
+				}
+			}
+		}
+		
+		public static int findNumber(int arr[],int start,int end) {
+
+				if((start - end) ==0) {
+					return arr[start];
+				}else {	
+					int mid = (start +end)/2;
+					if(arr[start]==mid) {
+						System.out.println("Number is "+start);
+					}else {
+						System.out.println("number present between"+start+" and "+mid+"?");
+					}
+						char answer = Utility.getString().charAt(0);
+						if(answer =='n'||answer=='N') {
+							return findNumber(arr, mid+1, end);
+						}
+						else {
+							return findNumber(arr, start, mid);
+						}
+				}
+		}
+		
+		public static String[] sortLinear(String[] str) {
+			for(int i=1;i<str.length;i++) {
+					String key = str[i];
+					int j= i-1;
+					while(j>=0) {
+					if((key.compareTo(str[j]))>0) {
+						break;
+					 }
+					str[j+1] = str[j];
+					j--;
+					}
+					str[j+1] = key;
+				}
+			return str;
+		}
+		
+		public static int[] readIntFile(String path,String split) {
+			String line;
+			String words[];
+			String wordIntList[];
+			List<String> ls = new ArrayList<>();
+			try {
+				FileInputStream fis = new FileInputStream(path);
+				InputStreamReader isr = new InputStreamReader(fis);
+				@SuppressWarnings("resource")
+				BufferedReader br = new BufferedReader(isr);
+				while((line=br.readLine())!=null) {
+					words = line.split(split);
+					for(String wordInt:words) {
+						ls.add(wordInt);
+					}
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			
+			wordIntList = ls.toArray(new String[ls.size()]);
+			int wordIntArr[] = new int[wordIntList.length];
+			
+			for(int i=0;i<wordIntArr.length;i++) {
+				wordIntArr[i] = Integer.parseInt(wordIntList[i]);
+			}
+			
+			return wordIntArr;
+		}
+		
+		public static int[] bubbleSortFile(int[] wordsInt) {
+			
+			
+			for(int i=0;i<wordsInt.length;i++) {
+				for(int j=i+1;j<wordsInt.length;j++) {
+					if(wordsInt[i]>wordsInt[j]) {
+						int temp = wordsInt[i];
+						wordsInt[i] = wordsInt[j];
+						wordsInt[j] = temp;
+					}
+				}
+			}
+			return wordsInt;
+		}
+		
+		
+		
 		
 
 
