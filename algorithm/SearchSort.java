@@ -7,13 +7,13 @@ public class SearchSort {
   
     public static void main(String[] args) {
          
-     Utility.binarySearch();
+//     Utility.binarySearch();
 //   Utility.BinarySearchString();
 //  	Utility.LinearSort();
-//    	Utility.LinearSortString();
+    	Utility.LinearSortString();
 //   Utility.BubbleSort();
-//    	Utility.BubbleSortString();
-    }
+//  	Utility.BubbleSortString();
+  }
 
 }
 		

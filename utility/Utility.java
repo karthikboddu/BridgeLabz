@@ -448,6 +448,136 @@ public class Utility {
 			return wordsInt;
 		}
 		
+		public static int calculateWeek(int d,int m,int y) {
+
+			
+			int y1 = y-(14-m)/12;
+			int m1 = m+12*((14-m)/12)-2;
+			int x =y1+(y1/4)-(y1/100)+(y1/400);
+			int d1 = (d+x+31*m1/12)%7;
+			
+			return d1;
+		}
+		
+		public static int paymentMonthly() {
+			System.out.println("enter principle");
+			double principle = Utility.getDouble();
+			System.out.println("enter rate");
+			double rate = Utility.getDouble();
+			System.out.println("enter no of years");
+			int year = Utility.getInteger();
+			
+			int n = year*12;
+			double r = rate/(12*100);
+			
+			double payment = (principle*r)/(1-Math.pow(1+r, -n));
+			
+			return (int)payment;
+		}
+		
+		public static void convertTemp(int value) {
+
+			switch (value) {
+			case 1:
+				System.out.println("enter celcuis");
+				double c = Utility.getDouble();
+				double CtoF = (c*9)/5+32;
+				System.out.println("celcuis to farenheit");
+				System.out.println(CtoF);
+				break;
+			case 2:
+				System.out.println("enter farenheit");
+				double f = Utility.getDouble();
+				double FtoC = ((f-32)*5)/9;
+				System.out.println("farenheit to celcuis");
+				System.out.println(FtoC);;
+			default:
+				System.out.println("enter valid option");
+				break;
+			} 
+		}
+		
+		public static void decimalToBinary() {
+			System.out.println("enter decimal");
+			int dec =  Utility.getInteger();
+			List<Integer> ls = new ArrayList<Integer>();
+			while(dec>0) {				
+				int rem = dec%2;	
+				ls.add(rem);
+				dec /=2;
+
+			}
+	
+			System.out.println("binary");
+	
+			System.out.println("original");
+			Integer arr[] = ls.toArray(new Integer[ls.size()]);
+			for(Integer asdf:arr) {
+				System.out.print(asdf+" ");
+			}
+			for(int i=arr.length-1;i>=0;i--) {
+				System.out.println(arr[i]);
+			}
+			
+//			int mid = (0+arr.length-1)/2;
+			Integer arr2[] = Arrays.copyOf(arr, 4);
+			System.out.println();
+			Integer arr3[] = Arrays.copyOfRange(arr, 4, 8);
+//			for(int i=arr.length-1,j=0;i>=0;i--) {
+//				arr2[j] = arr[i];
+//				j++;
+			
+//			}
+			for(Integer arer:arr2) {
+				System.out.print(arer+" ");
+			}
+			System.out.println();
+			
+			System.out.println();
+			
+			
+			for(Integer arear:arr3) {
+				System.out.println(arear+ " ");
+			}
+			
+			
+			int sum= 0;
+			double res =0;
+			int length = arr.length-1;
+			for(int i=0;i<arr.length;i++) {
+				 int arrvalue = arr[i];
+				 res= arrvalue*Math.pow(2,i);
+				 sum =sum+(int)res;
+				
+				 length--;
+			}
+			System.out.println(sum);
+			
+			
+		}
+		
+		public static void vendorMachine(int amount,int remChange[],int notesArr[]) {
+			int tempAmount = amount;
+			boolean flag = false;
+			for(int i=0;i<notesArr.length;i++) {
+		
+			if((tempAmount/notesArr[i])>0) {
+				int notes =tempAmount/notesArr[i];
+				tempAmount = tempAmount%notesArr[i];
+				remChange[i] =remChange[i]+ notes;
+				flag = true;
+				break;	
+			}
+			}
+			
+			if(flag) {
+			 vendorMachine(tempAmount, remChange, notesArr);
+			}
+			
+		}
+		
+		
+		
 		
 		
 		
