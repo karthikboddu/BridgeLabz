@@ -1,17 +1,18 @@
 package com.bridgelabz.utility;
 
-import java.util.List;
-import java.util.Map;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
-
-import javax.swing.text.AbstractDocument.BranchElement;
 
 
 public class Utility {
@@ -576,6 +577,34 @@ public class Utility {
 			
 		}
 		
+		public static void writeStringFile(String path,String append) {
+			try {
+				FileWriter fw = new FileWriter(path);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(append);
+				bw.close();
+				System.out.println("file updated");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+		
+		public static void writeIntFile(String path,String append) {
+			
+			try {
+				FileWriter fw = new FileWriter(path);
+				BufferedWriter bw = new BufferedWriter(fw);
+				bw.write(append);
+				bw.close();
+				System.out.println("File updated");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
+		}
 		
 		
 		

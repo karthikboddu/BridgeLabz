@@ -5,7 +5,7 @@ import com.bridgelabz.utility.Utility;
 public class MergeSort {
 
 	public static void main(String[] args) {
-		int arr[]= {10,2,1,6,9,22,55,33};
+		int arr[]= {10,2,1,6,9,22,11,33};
 		MergeSortArr(arr,new int[arr.length],0,arr.length-1);
 		Utility.printArray(arr);
 	}
@@ -21,7 +21,7 @@ public class MergeSort {
 	}
 	
 	public static void Merge(int arr[],int temp[],int leftStart,int rightEnd) {
-		int leftEnd = (leftStart+rightEnd)/2;
+ 		int leftEnd = (leftStart+rightEnd)/2;
 		int rightStart = (leftEnd+1);
 		int size = (rightEnd - leftStart)+1;
 		
@@ -38,10 +38,7 @@ public class MergeSort {
 				right++;
 			}
 			index++;
-			for(int arsdf:temp) {
-				System.out.print(arsdf+" flows ");
-			}
-			System.out.println();
+
 		}
 		
 		System.arraycopy(arr, left, temp, index, leftEnd-left+1);
