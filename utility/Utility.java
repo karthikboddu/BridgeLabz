@@ -2,7 +2,10 @@ package com.bridgelabz.utility;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +17,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
+
+import com.bridgelabz.algorithm.DayOfweek;
+import com.bridgelabz.objectoriented.InventoryData;
+import com.bridgelabz.objectoriented.StockAccount;
+import com.bridgelabz.objectoriented.Stockportfolio;
+
 
 public class Utility {
 	static Scanner sc = new Scanner(System.in);
@@ -21,6 +34,10 @@ public class Utility {
 		// TODO Auto-generated method stub
 		public static int getInteger() {
 			int inte = sc.nextInt();
+			return inte;
+		}
+		public static Integer getInteger1() {
+			Integer inte = sc.nextInt();
 			return inte;
 		}
 		public static float getFloat() {
@@ -33,6 +50,10 @@ public class Utility {
 		}
 		public static String getString() {
 			String str = sc.nextLine();
+			return str;
+		}
+		public static String getStringnext() {
+			String str = sc.next();
 			return str;
 		}
 		public static byte getBytes() {
@@ -125,7 +146,7 @@ public class Utility {
 //				 s1[i] = Utility.getString();
 //			}
 			
-			System.out.println("enter String to search with {a,ab,ee} ");
+			System.out.println("enter String to search ");
 			String s2 = Utility.getString();
 			String s3 = s2.toUpperCase();
 			int start =0;
@@ -146,7 +167,7 @@ public class Utility {
 			}
 		}
 		
-		public static void LinearSort() {
+		public static void insertionSort() {
 			int arr[] = {10,23,9,7,33,17};
 			for(int i=1;i<arr.length;i++) {
 				int key = arr[i];
@@ -165,7 +186,7 @@ public class Utility {
 			}
 		}
 		
-		public static void LinearSortString() {
+		public static void insertionSortString() {
 			String s1[] = {"a","g","d","z","f","e"};
 			System.out.println(Arrays.toString(s1));
 			System.out.println("elements");
@@ -241,6 +262,26 @@ public class Utility {
 			return aList;
 		}
 		
+		public static List<String> getPrimeStringNoUpto(int range) {
+			int counter=0;
+			int prime=2;
+			List<String> aList = new ArrayList<String>();
+			while(prime<range) {
+				boolean isPrime = true;
+				for(int j=2;j<=prime/2;j++)
+				if(prime%j==0) {
+					isPrime = false;
+					break;
+				}
+				if(isPrime) {
+					aList.add(prime+"");
+					counter++;
+				}
+				prime++;
+			}
+			return aList;
+		}
+		
 		public static void printArray(int arrays[]) {
 			for(int i=0;i<arrays.length;i++) {
 				System.out.println(arrays[i]);
@@ -290,6 +331,22 @@ public class Utility {
 			return anagram;
 		}
 		
+		public static List<String> getPrimeAnagramLList(List<String> ls) {
+			List<String> anagram = new ArrayList<String>();
+			String listToArray[] = ls.toArray(new String[ls.size()]);
+			for(int i=0;i<listToArray.length;i++) {
+				for(int j=i+1;j<listToArray.length;j++) {
+					if(isPrimeAnagram(listToArray[i],listToArray[j])) {
+						anagram.add(listToArray[i]);
+						anagram.add(listToArray[j]);
+						}
+				}
+			}
+			return anagram;
+		}
+		
+
+		
 		public static boolean isPrimeAnagram(String s1,String s2) {
 			String s1Arr[] = s1.split(" ");
 			String s2Arr[] = s2.split(" ");
@@ -323,6 +380,7 @@ public class Utility {
 			List<String> wordList = new ArrayList<String>();
 			String line;
 			String list[];
+			
 			try {
 				InputStream iS = new FileInputStream(path); //reads in byte
 				InputStreamReader iSR = new InputStreamReader(iS);//byte stream to character stream
@@ -341,6 +399,7 @@ public class Utility {
 				System.out.println(e);
 			}
 			list = wordList.toArray(new String[wordList.size()]);
+			
 			return list;
 		}
 		
@@ -373,11 +432,14 @@ public class Utility {
 					return arr[start];
 				}else {	
 					int mid = (start +end)/2;
+					System.out.println("number is 3?");
 					if(arr[start]==mid) {
 						System.out.println("Number is "+start);
 					}else {
+						
 						System.out.println("number present between"+start+" and "+mid+"?");
 					}
+					
 						char answer = Utility.getString().charAt(0);
 						if(answer =='n'||answer=='N') {
 							return findNumber(arr, mid+1, end);
@@ -513,12 +575,14 @@ public class Utility {
 	
 			System.out.println("original");
 			Integer arr[] = ls.toArray(new Integer[ls.size()]);
-			for(Integer asdf:arr) {
-				System.out.print(asdf+" ");
-			}
+
 			for(int i=arr.length-1;i>=0;i--) {
 				System.out.println(arr[i]);
 			}
+//			for(Integer asdf:arr) {
+//			System.out.print(asdf+" ");
+//		}			
+			
 			
 //			int mid = (0+arr.length-1)/2;
 			Integer arr2[] = Arrays.copyOf(arr, 4);
@@ -529,30 +593,30 @@ public class Utility {
 //				j++;
 			
 //			}
-			for(Integer arer:arr2) {
-				System.out.print(arer+" ");
-			}
-			System.out.println();
-			
-			System.out.println();
-			
-			
-			for(Integer arear:arr3) {
-				System.out.println(arear+ " ");
-			}
-			
-			
-			int sum= 0;
-			double res =0;
-			int length = arr.length-1;
-			for(int i=0;i<arr.length;i++) {
-				 int arrvalue = arr[i];
-				 res= arrvalue*Math.pow(2,i);
-				 sum =sum+(int)res;
-				
-				 length--;
-			}
-			System.out.println(sum);
+//			for(Integer arer:arr2) {
+//				System.out.print(arer+" ");
+//			}
+//			System.out.println();
+//			
+//			System.out.println();
+//			
+//			
+//			for(Integer arear:arr3) {
+//				System.out.println(arear+ " ");
+//			}
+//			
+//			
+//			int sum= 0;
+//			double res =0;
+//			int length = arr.length-1;
+//			for(int i=0;i<arr.length;i++) {
+//				 int arrvalue = arr[i];
+//				 res= arrvalue*Math.pow(2,i);
+//				 sum =sum+(int)res;
+//				
+//				 length--;
+//			}
+//			System.out.println(sum);
 			
 			
 		}
@@ -602,14 +666,132 @@ public class Utility {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+		
+		public static int[][] printCalender(int month,int yr) {
+			int d = calculateWeek(1, month, yr);
+			System.out.println(d);
+			 int[][] calender = new int[6][7];
+			 int length = calender[5].length;
+			 System.out.println(length);
+			 int months[] = {31,28,30,31,30,31,30,31,30,31,30,31};
+			 String[] monthname = {"","January", "February", "March","April", "May", "June","July", "August", "September","October", "November", "December"
+			          };
+ 			for(int i=0;i<calender.length;i++) {
+ 				for(int j=0;j<calender[i].length;j++) {
+ 					calender[i][j] = -1;
+ 				}
+ 			}
+ 			
+ 			
+ 			int dateinc=1;
+			for(int i=d;i<calender[0].length;i++) {
+				calender[0][i]=dateinc++;
+			}
+			for(int j=1;j<calender.length;j++) {
+				for(int k=0;k<calender[j].length;k++) {
+					calender[j][k] = dateinc++;
+				}
+			}
+			System.out.println("\t\t\t"+monthname[month]+"  "+yr);
+			System.out.println();
+			System.out.println( "        S       M       Tu       W      Th      F      Sa  ");
+			for(int i=0;i<calender.length;i++) {
+				for(int j=0;j<calender[i].length;j++) {
+					if(calender[i][j]<0||(calender[i][j]>months[month-1])) {
+						System.out.print("\t");
+					}else if(calender[i][j]>0) {
+						System.out.print("\t"+calender[i][j]+" ");
+					}
+				}
+				System.out.println("\t");
+			}
 			
+			return calender;
+		}
+//		public static String readJson(String path) {
+//			String str ="";
+//			String line ="";
+//			
+//			try {
+//				FileReader fr = new FileReader(path);
+//				BufferedReader br = new BufferedReader(fr);
+//				while((line=br.readLine())!=null) {
+//					str +=line;
+//				}
+//				
+//				
+//			} catch (FileNotFoundException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}catch (IOException io) {
+//				io.printStackTrace();
+//			}
+//			return str;
+//		}
+//	
+		
+		public static String readJson(String file) {
+		      File f = new File(file);
+		      String s = "myjson.json";
+		      String data ="";
+//		      List<String> lstr = new ArrayList<>();
+			  ObjectMapper mapper = new ObjectMapper();
+			  try {
+			  TypeReference<List<InventoryData>> typeref = new TypeReference<List<InventoryData>>() {};
+		    	  List<InventoryData> sp = mapper.readValue(f, typeref); 
+		         for(InventoryData p:sp) {
+		        	 System.out.println("name : "+p.getName()+"  weight : "+p.getWeight()+" price : "+p.getPrice());
+		        	 System.out.println("value " +p.getWeight()*p.getPrice());
+		        	 
+		         }
+//				 System.out.println(p.getName()+"   "+p.getWeight()+"    "+p.getPrice());	 
+//				 System.out.println("price  "+p.getWeight()*p.getPrice());
+//				data =  p.toString();
+
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		return data;
+//		         }
+		}
+		
+		public static void writeJson(Stockportfolio[] st) {
+			try {
+			ObjectMapper mapper = new ObjectMapper();
+			for(int i=0;i<st.length;i++) {
+			mapper.writeValue(new File("myjson.json"),st[i]);
+			}
+			System.out.println("written");
+			
+			
+			} catch (JsonParseException e) {
+				e.printStackTrace();
+			} catch (JsonMappingException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 		}
 		
-		
-		
-		
-		
+		public static String createAcc(String filename){
+			StockAccount sAcc = new StockAccount(filename);
+			System.out.println("enter symbol");
+			String symbol = Utility.getString();
+			sAcc.setStockSymbol(symbol);
+			System.out.println("enter the no of shares");
+			Integer numshares = Utility.getInteger1();
+			sAcc.setNoOfShares(numshares);
+			String data = sAcc.toString();
+			
+			return data;
+		}
 
 
 }

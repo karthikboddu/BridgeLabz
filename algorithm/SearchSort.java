@@ -9,8 +9,8 @@ public class SearchSort {
          
 //     Utility.binarySearch();
 //   Utility.BinarySearchString();
-//  	Utility.LinearSort();
-    	Utility.LinearSortString();
+//  	Utility.insertionSort();
+    	Utility.insertionSortString();
 //   Utility.BubbleSort();
 //  	Utility.BubbleSortString();
   }
