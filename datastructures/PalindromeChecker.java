@@ -3,7 +3,7 @@ package com.bridgelabz.datastructures;
 import com.bridgelabz.utility.DoubleLinkedList;
 import com.bridgelabz.utility.Utility;
 
-public class ParanthesisChecker {
+public class PalindromeChecker {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

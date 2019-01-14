@@ -2,6 +2,8 @@ package com.bridgelabz.objectoriented;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
@@ -44,11 +46,12 @@ public class Stock {
 
 	
 	
-	public static Stockportfolio[] getInput(int n) {
+	public static List<Stockportfolio> getInput(int n) {
 
 	     	Stockportfolio allStocks[] = new Stockportfolio[n];
+	     	 List<Stockportfolio> sa = new ArrayList<>(); 
 			Stockportfolio stock = new Stockportfolio();
-			for(int i=0;i<n;i++) {
+		
 				System.out.println("enter the name");
 				String name = Utility.getStringnext();
 				stock.setName(name);
@@ -58,22 +61,23 @@ public class Stock {
 				System.out.println("enter share value");
 				Double sharevalue = Utility.getDouble();
 				stock.setSharevalue(sharevalue);
-				allStocks[i] = stock;
-
+		
+				sa.add(stock);
 				
-				writeJson(allStocks); 
-				readJson();
-			}
+				writeJson(sa); 
+				
 			
+	
 	      
-	      return allStocks;
+	      return sa;
 	}
-	public static void writeJson(Stockportfolio[] st) {
+	public static void writeJson(List<Stockportfolio> st) {
+//		Stockportfolio stPort = getStock();
+		
 		try {
 		ObjectMapper mapper = new ObjectMapper();
-		for(int i=0;i<st.length;i++) {
-		mapper.writeValue(new File("myjson.json"),st[i]);
-		}
+		
+		mapper.writeValue(new File("myjson.json"),st);
 		System.out.println("written");
 		
 		
@@ -87,7 +91,11 @@ public class Stock {
 		
 	}
 	
-	
+//	public static Stockportfolio getStock() {
+//		Stockportfolio st1 = new Stockportfolio();
+//		st1.
+//	}
+//	
 	
 	
 	
@@ -100,7 +108,7 @@ public class Stock {
 		int n = Utility.getInteger();
 		getInput(n);
 		
-		
+		readJson();
 	 
 	}
 }

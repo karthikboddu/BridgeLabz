@@ -1,18 +1,48 @@
 package com.bridgelabz.objectoriented;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.parser.ParseException;
 
 import com.bridgelabz.utility.Utility;
 
-public class StockAccount implements CommertialData{
+public class StockAccount  {
 
-	private String stockSymbol;
-	private Integer noOfShares;
+	
+	
+	public static void getInput() throws FileNotFoundException, IOException, ParseException {
+        StockData stockData=new StockData();
+        System.out.println(" Enter your name:");
+        String name=Utility.getString();
+        System.out.println("Enter the file name");
+        String filename=Utility.getString();
+		StockData.createFile(filename);
+		System.out.println("1 : But  2: sell ");
+		int c = Utility.getInteger();
+		switch (c) {
+		case 1:
+			System.out.println("enter the symbol to buy");
+			String symbol = Utility.getString();
+			System.out.println("enter the amount");
+			int amount = Utility.getInteger();
+			stockData.buy(amount,symbol);
+			break;
+		case 2:
+			System.out.println("enter the symbol to sell");
+			String symbolsell = Utility.getString();
+			System.out.println("eenter the amount");
+			int amountto = Utility.getInteger();
+			stockData.sell(amountto, symbolsell);
+			break;
+		default:
+			break;
+		}
+	}
 	
 	
 	public StockAccount(String filename){
@@ -38,35 +68,9 @@ public class StockAccount implements CommertialData{
 //		
 //	}
 	
-	public void buy(int amount,String symbol) {
-		
-	}
-	
-	public void sell(int amount,String symbol) {
-		
-	}
-	
-	public void save(String filename) {
-		
-	}
 
 	
-	public String getStockSymbol() {
-		return stockSymbol;
-	}
-	public void setStockSymbol(String stockSymbol) {
-		this.stockSymbol = stockSymbol;
-	}
-	public Integer getNoOfShares() {
-		return noOfShares;
-	}
-	public void setNoOfShares(Integer noOfShares) {
-		this.noOfShares = noOfShares;
-	}
-	public String toString() {
-		return " name "+stockSymbol+" Numofshares "+noOfShares+"";
-	}
-	
+
 	public void printReport()
 	{
 		

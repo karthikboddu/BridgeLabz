@@ -19,7 +19,9 @@ public class LinkedListString {
 			n = n.next;
 		}
 	}
-	
+	public boolean isEmpty() {
+		return head == null;
+	}
 	public void insert(String data) {
 		Node new_node = new Node(data);
 		new_node.next = null;
@@ -63,6 +65,12 @@ public class LinkedListString {
 			new_node = new_node.next;
 		}
 		return false;
+	}
+	
+	public  String pop() {
+		String temp = head.data;
+		head  = head.next;
+		return temp;
 	}
 	
 	public void remove(String item) {

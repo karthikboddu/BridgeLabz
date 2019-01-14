@@ -1,13 +1,16 @@
 package com.bridgelabz.utility;
 
-public class Queue {
+public class Queue<T extends Comparable<T>> {
 	static Node front;
 	static Node rear;
 	static int length=0;
-	public static class Node{
-		int data;
-		Node next;
-		
+	public static class Node<T extends Comparable<T>>{
+		private T data;
+		private Node<T> next;
+		public Node(T data) {
+			this.data = data;
+			this.next = null;
+}
 	}
 	
 	public Queue() {
@@ -16,9 +19,8 @@ public class Queue {
 	public static boolean isEmpty() {
 		return front == null;
 	}
-	public static void enqueue(int item) {
-		Node temp = new Node();
-		temp.data = item;
+	public static void enqueue(Comparable data) {
+		Node temp = new Node(data);
 		if(isEmpty()) {
 			front = temp;
 		}else {
@@ -51,16 +53,16 @@ public class Queue {
 			n= n.next;
 		}
 	}
-	public static int totalAmount() {
-		Node node = front;
-		int total =0;
-		while(node.next!=null) {
-			total+=node.data;
-			node = node.next;
-		}
-		total+=node.data;
-		return total;
-	}
+//	public static int totalAmount() {
+//		Node node = front;
+//		Comparable total =0;
+//		while(node.next!=null) {
+//			total+=node.data;
+//			node = node.next;
+//		}
+//		total+=node.data;
+//		return (int) total;
+//	}
 	public static void main(String[] args) {
 		Queue.enqueue(4);
 		Queue.enqueue(9);
@@ -70,9 +72,9 @@ public class Queue {
 		Queue.dequeue();
 		System.out.println();
 		Queue.printlist();
-		int amount =Queue.totalAmount();
+//		int amount =Queue.totalAmount();
 		System.out.println();
-		System.out.println(amount);
+//		System.out.println(amount);
 	}
 
 }

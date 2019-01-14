@@ -1,37 +1,33 @@
 package com.bridgelabz.utility;
 
 
-public class Stack {
+public class Stack <T extends Comparable<T>> {
 
-	 public class Node { 
-		  
-	        char data; // integer data 
-	        Node next; // reference variavle Node type 
+	 public class Node <T extends Comparable<T>>{ 
+	        Comparable<T> data;  
+	        private Node<T> next; 
+	        public Node(Comparable data) {
+	        	this.data = data;
+	        }
 	    } 
 	    // create globle top reference variable 
-	    Node top; 
+	    public Node <T> top = null; 
 	    // Constructor 
-	    public Stack() 
-	    { 
-	        this.top = null; 
-	    } 
+	    
 	  
 	    // Utility function to add an element x in the stack 
-	    public void push(char x) // insert at the beginning 
+	    @SuppressWarnings("unused")
+		public void push(T data) // insert at the beginning 
 	    { 
 	        // create new node temp and allocate memory 
-	        Node temp = new Node(); 
+	        @SuppressWarnings("rawtypes")
+			Node temp = new Node(data); 
 	  
 	        // check if stack (heap) is full. Then inserting an 
 	        //  element would lead to stack overflow 
 	        if (temp == null) { 
-	            System.out.print("\nHeap Overflow"); 
-	            return; 
+	           top = temp; 
 	        } 
-	  
-	        // initialize data into temp data field 
-	        temp.data = x; 
-	  
 	        // put top reference into temp link 
 	        temp.next = top; 
 	  
@@ -46,7 +42,7 @@ public class Stack {
 	    } 
 	  
 	    // Utility function to return top element in a stack 
-	    public char peek() 
+	    public Comparable peek() 
 	    { 
 	        // check for empty stack 
 	        if (!isEmpty()) { 
@@ -54,21 +50,25 @@ public class Stack {
 	        } 
 	        else { 
 	            System.out.println("Stack is empty"); 
-	            return 0;
+	            return null;
 	        } 
 	    } 
 	  
 	    // Utility function to pop top element from the stack 
-	    public void pop() // remove at the beginning 
+	    public Node pop() // remove at the beginning 
 	    { 
 	        // check for stack underflow 
 	        if (top == null) { 
 	            System.out.print("\nStack Underflow"); 
-	            return; 
+	            return null; 
 	        } 
 	  
 	        // update the top pointer to point to the next node 
+	        Node temp = top;
+	        temp.next =null;
 	        top = top.next; 
+	        
+	        return temp;
 	    } 
 	  
 	    public void display() 

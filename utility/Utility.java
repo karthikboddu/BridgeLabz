@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 
 import org.codehaus.jackson.JsonParseException;
@@ -23,8 +24,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
 import com.bridgelabz.algorithm.DayOfweek;
+import com.bridgelabz.datastructures.LinkedListString;
 import com.bridgelabz.objectoriented.InventoryData;
 import com.bridgelabz.objectoriented.StockAccount;
+import com.bridgelabz.objectoriented.StockData;
 import com.bridgelabz.objectoriented.Stockportfolio;
 
 
@@ -781,7 +784,7 @@ public class Utility {
 		}
 		
 		public static String createAcc(String filename){
-			StockAccount sAcc = new StockAccount(filename);
+			StockData sAcc = new StockData();
 			System.out.println("enter symbol");
 			String symbol = Utility.getString();
 			sAcc.setStockSymbol(symbol);
@@ -791,6 +794,70 @@ public class Utility {
 			String data = sAcc.toString();
 			
 			return data;
+		}
+		
+		
+		public static String[][] card(String cards[][],String rank[],String suit[])
+		{
+			for(int i=0;i<suit.length;i++)
+			{
+				for(int j=0;j<rank.length;j++)
+				{
+					cards[i][j]=suit[i]+ " " +rank[j];
+					System.out.print(cards[i][j]+" ");
+				}
+				System.out.println();
+			}
+			return cards;
+		}
+		public static String[][] cardShuffle(String cards[][],String rank[],String suit[])
+		{		
+			for(int i=0;i<suit.length;i++)
+			{
+				for(int j=0;j<rank.length;j++)
+				{
+					//cards[i][j]=r.toString();
+					int rand1=(int) (Math.random()*suit.length);
+					int rand2=(int) (Math.random()*rank.length);
+					String temp=cards[rand1][rand2];
+					cards[rand1][rand2]=cards[i][j];
+					cards[i][j]=temp;
+					
+					System.out.println(rand1+" random "+rand2);
+					//System.out.println(cards[i][j]);
+				}
+			}
+			return cards;
+		}
+		public static void printcards(String cards[][])
+		{
+			for(int i=0;i<4;i++)
+			{
+				System.out.println("player"+ i);
+				for(int j=0;j<9;j++)
+				{
+					System.out.print(cards[i][j]+"-");
+				}
+				System.out.println();
+			}
+		}
+		
+		public static String[][] distributeCards(LinkedListString[] cards) {
+			String players[][] = new String[4][9];
+			Random randNo = new Random();
+			
+			for(int i=0;i<4;i++) {
+				for(int j=0;i<9;j++) {
+					int pos = randNo.nextInt(51);
+					if(!cards[pos].isEmpty()) {
+						players[i][j] = (String)cards[pos].pop();
+					}else {
+						j--;
+						}
+					
+				}
+			}
+			return players;
 		}
 
 
